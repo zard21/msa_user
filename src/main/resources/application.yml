@@ -1,0 +1,22 @@
+logging:
+  level:
+    kr.co.bomapp.user.client.PlannerClient: debug
+feign:
+  client:
+    config:
+      planner-client:
+        loggerLevel: full
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+hystrix:
+  command:
+    getUserInfo:
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000
+      circuitBreaker:
+        requestVolumeThreshold: 3
+        errorThresholdPercentage: 30
